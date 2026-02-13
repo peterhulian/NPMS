@@ -1,0 +1,91 @@
+/* Global Reset */
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Segoe UI', sans-serif; }
+
+body { background-color: #f5f7fa; color: #333; }
+
+/* Header */
+.app-header {
+  background-color: #008055; /* Match NPMS Green */
+  color: white;
+  padding: 20px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Dashboard Container */
+.dashboard-container { max-width: 480px; margin: 0 auto; background: white; min-height: 100vh; }
+main { padding: 20px; }
+
+/* Typography */
+h2 { font-size: 1.1rem; margin-bottom: 10px; color: #1f2937; }
+.subtitle { color: #888; font-size: 0.9rem; margin-bottom: 15px; }
+
+/* Pending Approvals */
+.approval-card {
+  background: white;
+  padding: 15px;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
+}
+.approval-actions button {
+  width: 35px; height: 35px; border-radius: 8px; border: none; font-weight: bold; cursor: pointer; margin-left: 5px;
+}
+.btn-approve { background-color: #008055; color: white; }
+.btn-reject { background-color: #dc2626; color: white; }
+
+/* Section Header */
+.section-header { display: flex; justify-content: space-between; align-items: center; }
+.btn-report { background: #1f2937; color: white; border: none; padding: 5px 10px; border-radius: 6px; }
+
+/* Room Cards */
+.room-card {
+  display: flex;
+  position: relative;
+  background: white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+  margin-bottom: 15px;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+/* Status Indicator Bar (Left side) */
+.status-indicator { width: 8px; height: 100%; position: absolute; left: 0; top: 0; }
+.status-red { background-color: #dc2626; }
+.status-green { background-color: #008055; }
+
+.card-content { padding: 15px 15px 15px 25px; width: 100%; }
+.card-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; }
+
+/* Badges */
+.status-badge { font-size: 0.75rem; padding: 4px 8px; border-radius: 12px; font-weight: bold; text-transform: uppercase; }
+.badge-red { background-color: #fee2e2; color: #dc2626; }
+.badge-green { background-color: #d1fae5; color: #008055; }
+
+/* Teacher Box */
+.teacher-info { background-color: #f3f4f6; padding: 10px; border-radius: 8px; margin-top: 10px; }
+.teacher-info.unassigned { background-color: #fef3c7; color: #92400e; }
+.teacher-info label { font-size: 0.7rem; color: #6b7280; display: block; }
+
+/* Modal */
+.modal-overlay {
+  position: fixed; top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0,0,0,0.5);
+  display: flex; justify-content: center; align-items: center;
+  z-index: 1000;
+}
+.modal-content { background: white; width: 90%; max-width: 400px; padding: 20px; border-radius: 16px; }
+.modal-header { display: flex; justify-content: space-between; margin-bottom: 15px; }
+.close-btn { background: none; border: none; font-size: 1.5rem; cursor: pointer; }
+.modal-actions { display: flex; gap: 10px; margin-top: 20px; }
+.btn { flex: 1; padding: 10px; border: none; border-radius: 8px; color: white; font-weight: bold; cursor: pointer; }
+.btn-call { background-color: #008055; }
+.btn-msg { background-color: #3b82f6; }
+.btn-edit { background-color: #f59e0b; max-width: 50px; }
+.text-red { color: #dc2626; }
+.text-green { color: #008055; }
