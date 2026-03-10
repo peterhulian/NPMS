@@ -1,5 +1,5 @@
 import React from 'react';
-import { LogOut } from 'lucide-react'; // If you installed lucide-react
+import { LogOut } from 'lucide-react'; 
 
 const Header = ({ userName, onLogout }) => {
   return (
@@ -7,8 +7,7 @@ const Header = ({ userName, onLogout }) => {
       <h1>Hello, {userName}</h1>
       <button className="logout-btn" onClick={onLogout}>
          <span style={{marginRight: '8px'}}>Logout</span>
-         {/* Simple arrow fallback if no icon library */}
-         ➜ 
+         <LogOut size={18} />
       </button>
     </header>
   );

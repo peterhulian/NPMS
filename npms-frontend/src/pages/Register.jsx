@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
-import { addRegistration } from '../data/mockData'; // Import the "backend" function
+import { addRegistration } from '../data/mockData'; 
 
-const Register = ({ onNavigate }) => {
+const Register = () => {
+  const navigate = useNavigate();
   const [formData, setFormData] = useState({
     role: 'Teacher',
     fullName: '',
@@ -12,7 +14,6 @@ const Register = ({ onNavigate }) => {
     contact: ''
   });
 
-  // Clear room if not teacher
   useEffect(() => {
     if (formData.role !== 'Teacher') {
       setFormData(prev => ({ ...prev, room: '' }));
@@ -26,7 +27,6 @@ const Register = ({ onNavigate }) => {
   const handleSubmit = (e) => {
     e.preventDefault();
     
-    // 1. Save data to our "mock database"
     addRegistration({
       name: formData.fullName,
       role: formData.role,
@@ -35,15 +35,12 @@ const Register = ({ onNavigate }) => {
       password: formData.password
     });
 
-    // 2. Show alert (Optional)
     alert("Registration successful! Please wait for Admin approval.");
-
-    // 3. Navigate back to Login
-    onNavigate('login');
+    navigate('/login');
   };
 
   return (
-    <Layout onBack={() => onNavigate('welcome')}>
+    <Layout onBack={() => navigate('/')}>
       <h2 className="desktop-page-title">Create Account</h2>
       <p className="form-subtitle">Join NPMS to manage noise levels.</p>
 
@@ -94,7 +91,7 @@ const Register = ({ onNavigate }) => {
 
         <p className="switch-auth">
           Already have an account? 
-          <span onClick={() => onNavigate('login')}> Log In</span>
+          <span onClick={() => navigate('/login')}> Log In</span>
         </p>
       </form>
     </Layout>

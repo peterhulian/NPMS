@@ -1,42 +1,33 @@
 import React, { useState } from 'react';
+import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import Welcome from './pages/Welcome';
 import Login from './pages/Login';
 import Register from './pages/Register';
 import Dashboard from './pages/Dashboard';
-import './styles/index.css';
+import './styles/App.css'; 
 
 function App() {
-  const [currentScreen, setCurrentScreen] = useState('welcome');
-  const [currentUser, setCurrentUser] = useState(null); // STORE LOGGED IN USER
+  const [user, setUser] = useState(null);
 
-  const handleLogin = (user) => {
-    setCurrentUser(user);
-    setCurrentScreen('dashboard');
-  };
-
-  const handleLogout = () => {
-    setCurrentUser(null);
-    setCurrentScreen('welcome');
-  };
-
-  const renderScreen = () => {
-    switch (currentScreen) {
-      case 'welcome':
-        return <Welcome onNavigate={setCurrentScreen} />;
-      case 'login':
-        // Pass handleLogin to save user data
-        return <Login onNavigate={setCurrentScreen} onLogin={handleLogin} />;
-      case 'register':
-        return <Register onNavigate={setCurrentScreen} />;
-      case 'dashboard':
-        // Pass the currentUser to the Dashboard
-        return <Dashboard user={currentUser} onNavigate={handleLogout} />;
-      default:
-        return <Welcome />;
-    }
-  };
-
-  return renderScreen();
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<Welcome />} />
+        <Route path="/login" element={<Login onLogin={setUser} />} />
+        <Route path="/register" element={<Register />} />
+        <Route 
+          path="/dashboard" 
+          element={
+            user ? (
+              <Dashboard user={user} onLogout={() => setUser(null)} />
+            ) : (
+              <Navigate to="/login" replace />
+            )
+          } 
+        />
+      </Routes>
+    </BrowserRouter>
+  );
 }
 
 export default App;

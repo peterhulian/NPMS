@@ -1,7 +1,10 @@
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
 
-const Welcome = ({ onNavigate }) => {
+const Welcome = () => {
+  const navigate = useNavigate();
+
   return (
     <Layout>
       <div style={{ textAlign: 'center' }}>
@@ -10,7 +13,7 @@ const Welcome = ({ onNavigate }) => {
         
         <button 
           className="btn-primary" 
-          onClick={() => onNavigate('login')}
+          onClick={() => navigate('/login')}
           style={{ marginBottom: '15px' }}
         >
           Log In to Dashboard
@@ -18,7 +21,7 @@ const Welcome = ({ onNavigate }) => {
         
         <button 
           className="btn-primary" 
-          onClick={() => onNavigate('register')}
+          onClick={() => navigate('/register')}
           style={{ backgroundColor: 'white', color: '#008055', border: '2px solid #008055' }}
         >
           Register New Account

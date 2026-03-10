@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Header from '../components/Header';
 import RoomCard from '../components/RoomCard';
 import Modal from '../components/Modal';
 import { getPendingApprovals, approveTeacher, rooms } from '../data/mockData';
 import { Bell, Phone, FileText } from 'lucide-react'; 
 
-const Dashboard = ({ user, onNavigate }) => {
+const Dashboard = ({ user, onLogout }) => {
+  const navigate = useNavigate();
   const [approvals, setApprovals] = useState(getPendingApprovals());
   const [selectedRoom, setSelectedRoom] = useState(null);
 
@@ -22,15 +24,19 @@ const Dashboard = ({ user, onNavigate }) => {
     setApprovals(newList);
   };
 
+  const handleLogOutClick = () => {
+    onLogout();
+    navigate('/');
+  };
+
   const myRoom = rooms.find(r => r.name === user?.room);
   const isNoisy = myRoom?.status === "NOISE DETECTED";
 
   return (
     <div className="dashboard-page">
-      <Header userName={user?.name || 'User'} onLogout={() => onNavigate('welcome')} />
+      <Header userName={user?.name || 'User'} onLogout={handleLogOutClick} />
       <main className="dashboard-container">
         
-        {/* --- VIEW 1: ADMIN --- */}
         {isAdmin && (
           <>
             {approvals.length > 0 && (
@@ -66,7 +72,6 @@ const Dashboard = ({ user, onNavigate }) => {
           </>
         )}
 
-        {/* --- VIEW 2: TEACHER --- */}
         {isTeacher && (
           <div className="teacher-dashboard">
             {myRoom ? (

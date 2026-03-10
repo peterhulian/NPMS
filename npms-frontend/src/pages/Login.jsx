@@ -1,38 +1,36 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Layout from '../components/Layout';
-import { checkLogin } from '../data/mockData'; // Import the login check function
+import { checkLogin } from '../data/mockData';
 
-const Login = ({ onNavigate, onLogin }) => {
+const Login = ({ onLogin }) => {
+  const navigate = useNavigate();
   const [credentials, setCredentials] = useState({ email: '', password: '' });
   const [error, setError] = useState('');
 
   const handleChange = (e) => {
     setCredentials({ ...credentials, [e.target.name]: e.target.value });
-    setError(''); // Clear error when typing
+    setError(''); 
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    
-    // 1. Check credentials against mock database
     const user = checkLogin(credentials.email, credentials.password);
 
     if (user) {
-      // 2. If valid, log them in
       onLogin(user); 
+      navigate('/dashboard');
     } else {
-      // 3. If invalid, show error
       setError("Invalid email or password");
     }
   };
 
   return (
-    <Layout onBack={() => onNavigate('welcome')}>
+    <Layout onBack={() => navigate('/')}>
       <h2 className="desktop-page-title">Welcome Back</h2>
       <p className="form-subtitle">Please enter your details to sign in.</p>
 
       <form onSubmit={handleSubmit}>
-        {/* Error Message Display */}
         {error && <p style={{color: 'red', marginBottom: '15px'}}>{error}</p>}
 
         <div className="input-group">
@@ -52,7 +50,7 @@ const Login = ({ onNavigate, onLogin }) => {
         
         <p className="switch-auth">
           Don't have an account? 
-          <span onClick={() => onNavigate('register')}> Create account</span>
+          <span onClick={() => navigate('/register')}> Create account</span>
         </p>
       </form>
     </Layout>
